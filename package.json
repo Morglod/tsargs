@@ -1,0 +1,26 @@
+{
+  "name": "tsargs",
+  "version": "1.0.0",
+  "description": "typescript function arguments utils",
+  "types": "lib/index.ts",
+  "scripts": {
+    "test": "tsc",
+	  "build": "tsc"
+  },
+  "keywords": [
+    "typescript",
+    "ts",
+    "args",
+    "arguments",
+    "types"
+  ],
+  "author": "morglod",
+  "license": "MIT",
+  "peerDependencies": {
+    "typescript": "^2.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Morglod/tsargs"
+  }
+}
