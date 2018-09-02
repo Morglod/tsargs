@@ -1,3 +1,5 @@
+[![NPM Version](https://badge.fury.io/js/tsargs.svg?style=flat)](https://www.npmjs.com/package/tsargs)
+
 # tsargs
 
 TypeScript utility types for function arguments
