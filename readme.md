@@ -76,13 +76,29 @@ const booFromFoo2: Post1ArgN<string, typeof foo> = boo;
 
 Post`N`ArgN type may cause low ts performance
 
+## Pick range of arguments
+
+Callbacks & arguments list
+
+Use `Args10` to pick 10 args of function  
+
+Use Args`N`off`Offset` to pick `N` args with `Offset` offset (max 10 arg)
+
+```ts
+import { Args2off1 } from 'tsargs';
+
+function foo(a: boolean, b: number, c: string) {}
+const argsBC: Args2off1<typeof foo> = [ 123, 'Hello' ];
+```
+
 ## Roadmap
 
 * Example of typed event emitter
-* Pick range of arguments to array type
+* ✔ Pick range of arguments to array type
+* Pick any number of arguments to array type
 * Pick arguments to object
 * Specific argument's type replace
-* Replace return type
 * Remove arguments
+* Replace return type (not yet possible with buggy ts 3.0.3 rest parameters)
 
 [Write issue on github](https://github.com/Morglod/tsargs/issues) if you have any trouble with arguments in typescript

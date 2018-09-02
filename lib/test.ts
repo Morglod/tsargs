@@ -55,3 +55,8 @@ function staticAssert4PreN() {
     let goo: (x: boolean, y: number, a: string, b: number) => void;
     goo = foo as any as a.Pre2ArgN<boolean, number, typeof foo>;
 }
+
+function staticAssert5PickRange() {
+    function foo(a: string, b: number, c: boolean) {}
+    const args: a.Args2off1<typeof foo> = [ 123, true ];
+}
