@@ -3,7 +3,7 @@ import { Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10 } from "./p
 import { IfExtends } from "./utils";
 
 export type ArgsN<T extends Function> =
-    IfExtends<T, () => any, [],
+    IfExtends<T, () => any, void,
         IfExtends<T, (arg1: Arg1<T>) => any, [Arg1<T>],
             IfExtends<T, (arg1: Arg1<T>, arg2: Arg2<T>) => any, Args2off0<T>,
                 IfExtends<T, (arg1: Arg1<T>, arg2: Arg2<T>, arg3: Arg3<T>) => any, Args3off0<T>,
