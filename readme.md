@@ -97,7 +97,7 @@ Use `ArgsN` to pick unknown number of arguments (max 10)
 import { ArgsN } from 'tsargs';
 
 function foo(a: boolean, b: number, c: string) {}
-const argsBC: ArgsN<typeof foo> = [ true, 123, 'Hello' ];
+const argsABC: ArgsN<typeof foo> = [ true, 123, 'Hello' ];
 ```
 
 ## Replace return type of function
