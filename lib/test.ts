@@ -1,6 +1,8 @@
 // Test ArgN types statically
 
 import * as a from './index';
+import { ArgsN } from './pick-rangen';
+import { ReplaceReturn } from './replace-return';
 
 function staticAssert1Args() {
     function foo(a: string, b: number) { /** */ }
@@ -59,4 +61,45 @@ function staticAssert4PreN() {
 function staticAssert5PickRange() {
     function foo(a: string, b: number, c: boolean) {}
     const args: a.Args2off1<typeof foo> = [ 123, true ];
+}
+
+function staticAssert6Post() {
+    function foo(a: string, b: number) {}
+
+    let boo: (a: string, b: number, x: boolean) => void;
+    boo = foo as any as a.Post1Arg2<boolean, typeof foo>;
+
+    let goo: (a: string, b: number, x: boolean, y: number) => void;
+    goo = foo as any as a.Post2Arg2<boolean, number, typeof foo>;
+}
+
+function staticAssert7PickRangeN() {
+    function foo(a: string, b: number, c: boolean) {}
+    const args: ArgsN<typeof foo> = [ 'hello', 123, true ];
+}
+
+function staticAssert8PostN() {
+    function foo(a: string, b: number) {}
+
+    let boo: (a: string, b: number, x: boolean) => void;
+    boo = foo as any as a.Post1ArgN<boolean, typeof foo>;
+
+    let goo: (a: string, b: number, x: boolean, y: number) => void;
+    goo = foo as any as a.Post2ArgN<boolean, number, typeof foo>;
+}
+
+function staticAssert9ReplaceReturn() {
+    function foo(a: string, b: number) {
+        return 'hello world';
+    }
+
+    let boo: (a: string, b: number, x: boolean) => number;
+    boo = foo as any as ReplaceReturn<number, a.Post1ArgN<boolean, typeof foo>>;
+}
+
+function staticAssert10ReplaceReturn() {
+    function foo(a: number, b: string): number { return 0; }
+    function boo(a: number, b: string): string { return '0'; }
+    
+    const booFromFoo: ReplaceReturn<string, typeof foo> = boo;
 }

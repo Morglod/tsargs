@@ -91,14 +91,34 @@ function foo(a: boolean, b: number, c: string) {}
 const argsBC: Args2off1<typeof foo> = [ 123, 'Hello' ];
 ```
 
+Use `ArgsN` to pick unknown number of arguments (max 10)
+
+```ts
+import { ArgsN } from 'tsargs';
+
+function foo(a: boolean, b: number, c: string) {}
+const argsBC: ArgsN<typeof foo> = [ true, 123, 'Hello' ];
+```
+
+## Replace return type of function
+
+```ts
+import { ReplaceReturn } from 'tsargs';
+
+function foo(a: number, b: string): number {}
+function boo(a: number, b: string): string {}
+
+const booFromFoo: ReplaceReturn<string, typeof foo> = boo;
+```
+
 ## Roadmap
 
 * Example of typed event emitter
 * ✔ Pick range of arguments to array type
-* Pick any number of arguments to array type
+* ✔ Pick any number of arguments to array type
 * Pick arguments to object
 * Specific argument's type replace
 * Remove arguments
-* Replace return type (not yet possible with buggy ts 3.0.3 rest parameters)
+* ✔ Replace return type
 
 [Write issue on github](https://github.com/Morglod/tsargs/issues) if you have any trouble with arguments in typescript

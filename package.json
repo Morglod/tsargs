@@ -1,11 +1,11 @@
 {
   "name": "tsargs",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "typescript function arguments utils",
   "types": "lib/index.ts",
   "scripts": {
     "test": "tsc",
-	  "build": "tsc"
+    "build": "tsc"
   },
   "keywords": [
     "typescript",
