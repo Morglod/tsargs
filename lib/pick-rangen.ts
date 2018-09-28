@@ -2,6 +2,7 @@ import { Args10, Args9off0, Args8off0, Args7off0, Args6off0, Args5off0, Args4off
 import { Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10 } from "./pick";
 import { IfExtends } from "./utils";
 
+// tslint:disable
 export type ArgsN<T extends Function> =
     IfExtends<T, () => any, void,
         IfExtends<T, (arg1: Arg1<T>) => any, [Arg1<T>],

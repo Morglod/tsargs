@@ -1,5 +1,7 @@
 import * as pick from './pick';
 
+// tslint:disable
+
 /*
 Generator:
 

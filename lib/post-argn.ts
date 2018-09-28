@@ -2,6 +2,8 @@ import * as post from './post';
 import { Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10 } from "./pick";
 import { IfExtends } from "./utils";
 
+// tslint:disable
+
 /*
 
 Generator:

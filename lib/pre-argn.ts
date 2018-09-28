@@ -1,5 +1,7 @@
 import * as pre from './pre';
 
+// tslint:disable
+
 /*
 
 Generator:

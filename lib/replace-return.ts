@@ -1,6 +1,8 @@
 import { Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10 } from "./pick";
 import { IfExtends } from "./utils";
 
+// tslint:disable
+
 export type ReplaceReturn<RT, T extends Function> =
     IfExtends<T, () => any, () => RT,
         IfExtends<T, (arg1: Arg1<T>) => any, (arg1: Arg1<T>) => RT,
