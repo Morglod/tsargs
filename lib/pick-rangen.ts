@@ -3,8 +3,17 @@ import { Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10 } from "./p
 import { IfExtends } from "./utils";
 
 // tslint:disable
-export type ArgsN<T extends Function> =
-    IfExtends<T, () => any, void,
+/**
+ * `T` - Method  
+ * `NoArgs` - Type used when no args found  
+ * `ManyArgs` - Type used when 10+ args found
+*/
+export type ArgsN<
+    T extends Function,
+    NoArgs = [],
+    ManyArgs = Args10<T>,
+> =
+    IfExtends<T, () => any, NoArgs,
         IfExtends<T, (arg1: Arg1<T>) => any, [Arg1<T>],
             IfExtends<T, (arg1: Arg1<T>, arg2: Arg2<T>) => any, Args2off0<T>,
                 IfExtends<T, (arg1: Arg1<T>, arg2: Arg2<T>, arg3: Arg3<T>) => any, Args3off0<T>,
@@ -14,5 +23,5 @@ export type ArgsN<T extends Function> =
                                 IfExtends<T, (arg1: Arg1<T>, arg2: Arg2<T>, arg3: Arg3<T>, arg4: Arg4<T>, arg5: Arg5<T>, arg6: Arg6<T>, arg7: Arg7<T>) => any, Args7off0<T>,
                                     IfExtends<T, (arg1: Arg1<T>, arg2: Arg2<T>, arg3: Arg3<T>, arg4: Arg4<T>, arg5: Arg5<T>, arg6: Arg6<T>, arg7: Arg7<T>, arg8: Arg8<T>) => any, Args8off0<T>,
                                         IfExtends<T, (arg1: Arg1<T>, arg2: Arg2<T>, arg3: Arg3<T>, arg4: Arg4<T>, arg5: Arg5<T>, arg6: Arg6<T>, arg7: Arg7<T>, arg8: Arg8<T>, arg9: Arg9<T>) => any, Args9off0<T>,
-                                            IfExtends<T, (arg1: Arg1<T>, arg2: Arg2<T>, arg3: Arg3<T>, arg4: Arg4<T>, arg5: Arg5<T>, arg6: Arg6<T>, arg7: Arg7<T>, arg8: Arg8<T>, arg9: Arg9<T>, arg10: Arg10<T>) => any, Args10<T>, IArguments
+                                            IfExtends<T, (arg1: Arg1<T>, arg2: Arg2<T>, arg3: Arg3<T>, arg4: Arg4<T>, arg5: Arg5<T>, arg6: Arg6<T>, arg7: Arg7<T>, arg8: Arg8<T>, arg9: Arg9<T>, arg10: Arg10<T>) => any, Args10<T>, ManyArgs
                                             >>>>>>>>>>>;

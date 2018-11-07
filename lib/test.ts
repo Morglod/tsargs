@@ -103,3 +103,20 @@ function staticAssert10ReplaceReturn() {
     
     const booFromFoo: ReplaceReturn<string, typeof foo> = boo;
 }
+
+function staticAssertRestArgsN() {
+    const myCallbacks = {
+        foo: (a: number, b: number) => a + b,
+        boo: (a: number) => a + 10,
+    };
+    
+    function call<
+        CallbackName extends keyof Callbacks,
+        Callbacks extends { [k: string]: (...args: any[]) => any } = typeof myCallbacks,
+        Callback extends (...args: any[]) => any = Callbacks[CallbackName],
+    >(callbackName: CallbackName, ...args: ArgsN<Callback>): ReturnType<Callback> {
+        return (myCallbacks as { [k: string]: Function })[callbackName as any](...args);
+    }
+    
+    call('foo', 1, 2);
+}

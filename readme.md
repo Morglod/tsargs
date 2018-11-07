@@ -100,6 +100,39 @@ function foo(a: boolean, b: number, c: string) {}
 const argsABC: ArgsN<typeof foo> = [ true, 123, 'Hello' ];
 ```
 
+```ts
+/**
+ * `T` - Method  
+ * `NoArgs` - Type used when no args found  
+ * `ManyArgs` - Type used when 10+ args found
+*/
+type ArgsN<
+    T extends Function,
+    NoArgs = [],
+    ManyArgs = Args10<T>,
+>;
+```
+
+Now `ArgsN` could be used in rest arguments:
+
+```ts
+const myCallbacks = {
+    foo: (a: number, b: number) => a + b,
+    boo: (a: number) => a + 10,
+};
+
+function call<
+    CallbackName extends keyof Callbacks,
+    Callbacks extends { [k: string]: (...args: any[]) => any } = typeof myCallbacks,
+    Callback extends (...args: any[]) => any = Callbacks[CallbackName],
+>(callbackName: CallbackName, ...args: ArgsN<Callback>): ReturnType<Callback> {
+    return (myCallbacks as { [k: string]: Function })[callbackName as any](...args);
+}
+
+call('foo', 1, 2); // ok
+call('boo', 1, 2); // Error: Should be 2 args, recieved 3
+```
+
 ## Replace return type of function
 
 ```ts
