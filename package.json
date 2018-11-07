@@ -1,6 +1,6 @@
 {
   "name": "tsargs",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "typescript function arguments utils",
   "types": "lib/index.ts",
   "scripts": {

@@ -133,6 +133,8 @@ call('foo', 1, 2); // ok
 call('boo', 1, 2); // Error: Should be 2 args, recieved 3
 ```
 
+Checkout [typed event emitter](https://github.com/Morglod/ts-event-emitter) for real-world example.
+
 ## Replace return type of function
 
 ```ts
@@ -146,7 +148,7 @@ const booFromFoo: ReplaceReturn<string, typeof foo> = boo;
 
 ## Roadmap
 
-* Example of typed event emitter
+* ✔ [Example of typed event emitter](https://github.com/Morglod/ts-event-emitter)
 * ✔ Pick range of arguments to array type
 * ✔ Pick any number of arguments to array type
 * Pick arguments to object
