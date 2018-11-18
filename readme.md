@@ -23,9 +23,11 @@ For typescript `2.8.x` switch to `ts280` branch.
 <summary>
 How to use ts280 branch
 </summary>
+
 ```
 npm install git://github.com/morglod/tsargs.git#ts280
 ```
+
 </details>
 
 ## Install & use
@@ -74,17 +76,6 @@ const secondArg: Arg2<typeof foo> = 'hello world!';
 ```
 </details>
 
-## Replace return type of function
-
-```ts
-import { ReplaceReturn } from 'tsargs';
-
-function foo(a: number, b: string): number {}
-function boo(a: number, b: string): string {}
-
-const booFromFoo: ReplaceReturn<string, typeof foo> = boo;
-```
-
 ## Get arguments number
 
 ```ts
@@ -95,6 +86,17 @@ function boo(a: number, b: string, c: boolean): string { return '0'; }
 
 const fooI: ArgsNum<typeof foo> = 2;
 const booI: ArgsNum<typeof boo> = 3;
+```
+
+## Replace return type of function
+
+```ts
+import { ReplaceReturn } from 'tsargs';
+
+function foo(a: number, b: string): number {}
+function boo(a: number, b: string): string {}
+
+const booFromFoo: ReplaceReturn<string, typeof foo> = boo;
 ```
 
 ## Prepend arguments
@@ -189,10 +191,10 @@ Checkout [typed event emitter](https://github.com/Morglod/ts-event-emitter) for 
 * ✔️ [Example of typed event emitter](https://github.com/Morglod/ts-event-emitter)
 * ✔️ Pick range of arguments to array type
 * ✔️ Pick any number of arguments to array type
-* ❌ Pick arguments to object
+* ❌ Pick arguments to object (not needed, use tuples instead)
+* ✔️ Replace return type
 * Specific argument's type replace
 * Remove arguments
-* ✔️ Replace return type
 
 [Write issue on github](https://github.com/Morglod/tsargs/issues) if you have any trouble with arguments in typescript
 
