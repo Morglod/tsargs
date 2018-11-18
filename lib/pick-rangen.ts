@@ -8,7 +8,7 @@ import { IfExtends } from "./utils";
  * `NoArgs` - Type used when no args found  
  * `ManyArgs` - Type used when 10+ args found
 */
-export type ArgsN<
+export type ArgsN_Old<
     T extends Function,
     NoArgs = [],
     ManyArgs = Args10<T>,
@@ -25,3 +25,6 @@ export type ArgsN<
                                         IfExtends<T, (arg1: Arg1<T>, arg2: Arg2<T>, arg3: Arg3<T>, arg4: Arg4<T>, arg5: Arg5<T>, arg6: Arg6<T>, arg7: Arg7<T>, arg8: Arg8<T>, arg9: Arg9<T>) => any, Args9off0<T>,
                                             IfExtends<T, (arg1: Arg1<T>, arg2: Arg2<T>, arg3: Arg3<T>, arg4: Arg4<T>, arg5: Arg5<T>, arg6: Arg6<T>, arg7: Arg7<T>, arg8: Arg8<T>, arg9: Arg9<T>, arg10: Arg10<T>) => any, Args10<T>, ManyArgs
                                             >>>>>>>>>>>;
+
+export type ArgsN<T extends (...args: any[]) => any> = T extends (...args: infer K) => any ? K : never;
+export type ArgsNum<T extends (...args: any[]) => any> = T extends (...args: infer K) => any ? K["length"] : never;

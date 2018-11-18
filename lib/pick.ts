@@ -1,3 +1,7 @@
+import { IfExtends } from "./utils";
+
+export type ArgI<T, N extends number> = T extends (...args: infer K) => any ? IfExtends<K[-1], K[N], never, K[N]> : never;
+
 export type Arg1<T> = T extends (arg1: infer U, ...args: any[]) => any ? U : undefined;
 export type Arg2<T> = T extends (arg1: any, arg2: infer U, ...args: any[]) => any ? U : undefined;
 export type Arg3<T> = T extends (arg1: any, arg2: any, arg3: infer U, ...args: any[]) => any ? U : undefined;

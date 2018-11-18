@@ -6,3 +6,4 @@ export * from './post-argn';
 export * from './pick-range';
 export * from './utils';
 export * from './pick-rangen';
+export * from './replace-return';

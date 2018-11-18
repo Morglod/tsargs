@@ -1,8 +1,9 @@
 // Test ArgN types statically
 
 import * as a from './index';
-import { ArgsN } from './pick-rangen';
+import { ArgsN, ArgsNum } from './pick-rangen';
 import { ReplaceReturn } from './replace-return';
+import { ArgI } from './pick';
 
 function staticAssert1Args() {
     function foo(a: string, b: number) { /** */ }
@@ -76,6 +77,9 @@ function staticAssert6Post() {
 function staticAssert7PickRangeN() {
     function foo(a: string, b: number, c: boolean) {}
     const args: ArgsN<typeof foo> = [ 'hello', 123, true ];
+
+    function boo() {}
+    const args2: ArgsN<typeof boo> = [];
 }
 
 function staticAssert8PostN() {
@@ -119,4 +123,19 @@ function staticAssertRestArgsN() {
     }
     
     call('foo', 1, 2);
+}
+
+function staticAssertArgsNum() {
+    function foo(a: number, b: string): number { return 0; }
+    function boo(a: number, b: string, c: boolean): string { return '0'; }
+
+    const fooI: ArgsNum<typeof foo> = 2;
+    const booI: ArgsNum<typeof boo> = 3;
+}
+
+function staticAssertArgI() {
+    function boo(a: number, b: string, c: boolean): string { return '0'; }
+    const a: ArgI<typeof boo, 0> = 123;
+    const b: ArgI<typeof boo, 1> = '123';
+    const c: ArgI<typeof boo, 2> = false;
 }

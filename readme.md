@@ -4,13 +4,29 @@
 
 TypeScript utility types for function arguments
 
-* Pick type of specific argument
-* Prepend arguments
-* Append arguments
+* [Pick type of argument](#pick-argument)
+* [Get arguments number](#get-arguments-number)
+* [Replace return type of function](#replace-return-type-of-function)
+* [Pick specific range of arguments](#pick-range-of-arguments)
+* [Prepend arguments](#prepend-arguments)
+* [Append arguments](#append-arguments)
+
+Checkout [typed event emitter](https://github.com/Morglod/ts-event-emitter) for real-world example.
 
 [Tested with static asserts](/lib/test.ts)
 
-Should use typescript `2.8` and upper
+⚠️ Should use latest typescript version. ⚠️
+
+For typescript `2.8.x` switch to `ts280` branch.
+
+<details>
+<summary>
+How to use ts280 branch
+</summary>
+```
+npm install git://github.com/morglod/tsargs.git#ts280
+```
+</details>
 
 ## Install & use
 
@@ -19,16 +35,35 @@ npm i tsargs
 ```
 
 ```ts
-import { Arg2 } from 'tsargs';
+import { ArgI, Arg2 } from 'tsargs';
 
 function foo(a: number, b: string) {}
 
+// Pick by index
+const firstArg: ArgI<typeof foo, 0> = 'hello world!';
+
+// Pick by definition
 const secondArg: Arg2<typeof foo> = 'hello world!';
 ```
 
 ## Pick argument
 
-Use Arg`N` type to pick `N` argument (max 10 arg)
+Use `ArgI<Function, Index>` to pick argument by it's index.
+
+```ts
+import { ArgI } from 'tsargs';
+
+function foo(a: number, b: string) {}
+
+const secondArg: ArgI<typeof foo, 1> = 'hello world!';
+```
+
+<details>
+<summary>
+ArgN variant
+</summary>
+
+Use Arg`N` type to pick `N` argument (max 10 arg)  
 
 ```ts
 import { Arg2 } from 'tsargs';
@@ -36,6 +71,30 @@ import { Arg2 } from 'tsargs';
 function foo(a: number, b: string) {}
 
 const secondArg: Arg2<typeof foo> = 'hello world!';
+```
+</details>
+
+## Replace return type of function
+
+```ts
+import { ReplaceReturn } from 'tsargs';
+
+function foo(a: number, b: string): number {}
+function boo(a: number, b: string): string {}
+
+const booFromFoo: ReplaceReturn<string, typeof foo> = boo;
+```
+
+## Get arguments number
+
+```ts
+import { ArgsNum } from 'tsargs';
+
+function foo(a: number, b: string): number { return 0; }
+function boo(a: number, b: string, c: boolean): string { return '0'; }
+
+const fooI: ArgsNum<typeof foo> = 2;
+const booI: ArgsNum<typeof boo> = 3;
 ```
 
 ## Prepend arguments
@@ -91,7 +150,7 @@ function foo(a: boolean, b: number, c: string) {}
 const argsBC: Args2off1<typeof foo> = [ 123, 'Hello' ];
 ```
 
-Use `ArgsN` to pick unknown number of arguments (max 10)
+Use `ArgsN` to pick all arguments
 
 ```ts
 import { ArgsN } from 'tsargs';
@@ -100,20 +159,7 @@ function foo(a: boolean, b: number, c: string) {}
 const argsABC: ArgsN<typeof foo> = [ true, 123, 'Hello' ];
 ```
 
-```ts
-/**
- * `T` - Method  
- * `NoArgs` - Type used when no args found  
- * `ManyArgs` - Type used when 10+ args found
-*/
-type ArgsN<
-    T extends Function,
-    NoArgs = [],
-    ManyArgs = Args10<T>,
->;
-```
-
-Now `ArgsN` could be used in rest arguments:
+`ArgsN` could be used in rest arguments:
 
 ```ts
 const myCallbacks = {
@@ -125,7 +171,10 @@ function call<
     CallbackName extends keyof Callbacks,
     Callbacks extends { [k: string]: (...args: any[]) => any } = typeof myCallbacks,
     Callback extends (...args: any[]) => any = Callbacks[CallbackName],
->(callbackName: CallbackName, ...args: ArgsN<Callback>): ReturnType<Callback> {
+>(
+    callbackName: CallbackName,
+    ...args: ArgsN<Callback> // <<<<---------------
+): ReturnType<Callback> {
     return (myCallbacks as { [k: string]: Function })[callbackName as any](...args);
 }
 
@@ -135,25 +184,18 @@ call('boo', 1, 2); // Error: Should be 2 args, recieved 3
 
 Checkout [typed event emitter](https://github.com/Morglod/ts-event-emitter) for real-world example.
 
-## Replace return type of function
-
-```ts
-import { ReplaceReturn } from 'tsargs';
-
-function foo(a: number, b: string): number {}
-function boo(a: number, b: string): string {}
-
-const booFromFoo: ReplaceReturn<string, typeof foo> = boo;
-```
-
 ## Roadmap
 
-* ✔ [Example of typed event emitter](https://github.com/Morglod/ts-event-emitter)
-* ✔ Pick range of arguments to array type
-* ✔ Pick any number of arguments to array type
-* Pick arguments to object
+* ✔️ [Example of typed event emitter](https://github.com/Morglod/ts-event-emitter)
+* ✔️ Pick range of arguments to array type
+* ✔️ Pick any number of arguments to array type
+* ❌ Pick arguments to object
 * Specific argument's type replace
 * Remove arguments
-* ✔ Replace return type
+* ✔️ Replace return type
 
 [Write issue on github](https://github.com/Morglod/tsargs/issues) if you have any trouble with arguments in typescript
+
+## Contributors
+
+Thanks [CallumDenby](https://github.com/CallumDenby) for ArgI solution!
