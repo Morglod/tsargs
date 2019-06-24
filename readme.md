@@ -11,7 +11,7 @@ TypeScript utility types for function arguments
 * [Prepend arguments](#prepend-arguments)
 * [Append arguments](#append-arguments)
 
-Checkout [typed event emitter](https://github.com/Morglod/ts-event-emitter) for real-world example.
+Checkout [typed event emitter](https://github.com/Morglod/tsee) for real-world example.
 
 [Tested with static asserts](/lib/test.ts)
 
@@ -184,11 +184,11 @@ call('foo', 1, 2); // ok
 call('boo', 1, 2); // Error: Should be 2 args, recieved 3
 ```
 
-Checkout [typed event emitter](https://github.com/Morglod/ts-event-emitter) for real-world example.
+Checkout [typed event emitter](https://github.com/Morglod/tsee) for real-world example.
 
 ## Roadmap
 
-* ✔️ [Example of typed event emitter](https://github.com/Morglod/ts-event-emitter)
+* ✔️ [Example of typed event emitter](https://github.com/Morglod/tsee)
 * ✔️ Pick range of arguments to array type
 * ✔️ Pick any number of arguments to array type
 * ❌ Pick arguments to object (not needed, use tuples instead)
