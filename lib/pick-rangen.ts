@@ -28,3 +28,5 @@ export type ArgsN_Old<
 
 export type ArgsN<T extends (...args: any[]) => any> = T extends (...args: infer K) => any ? K : never;
 export type ArgsNum<T extends (...args: any[]) => any> = T extends (...args: infer K) => any ? K["length"] : never;
+
+export type Args<T extends (...args: any[]) => any> = ArgsN<T>;

@@ -4,6 +4,7 @@ import * as a from './index';
 import { ArgsN, ArgsNum } from './pick-rangen';
 import { ReplaceReturn } from './replace-return';
 import { ArgI } from './pick';
+import { CtorArgs } from './ctor-args';
 
 function staticAssert1Args() {
     function foo(a: string, b: number) { /** */ }
@@ -138,4 +139,16 @@ function staticAssertArgI() {
     const a: ArgI<typeof boo, 0> = 123;
     const b: ArgI<typeof boo, 1> = '123';
     const c: ArgI<typeof boo, 2> = false;
+}
+
+function ctorArgs() {
+    class A {
+        constructor(
+            public x: number,
+            public y: string,
+            public z: boolean,
+        ) {}
+    }
+
+    const _: CtorArgs<typeof A> = [ 0, '0', false ];
 }

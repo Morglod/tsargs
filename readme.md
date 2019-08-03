@@ -5,6 +5,7 @@
 TypeScript utility types for function arguments
 
 * [Pick type of argument](#pick-argument)
+* [Pick args of class constructor](#class-constructor)
 * [Get arguments number](#get-arguments-number)
 * [Replace return type of function](#replace-return-type-of-function)
 * [Pick specific range of arguments](#pick-range-of-arguments)
@@ -37,9 +38,12 @@ npm i tsargs
 ```
 
 ```ts
-import { ArgI, Arg2 } from 'tsargs';
+import { ArgI, Arg2, Args } from 'tsargs';
 
 function foo(a: number, b: string) {}
+
+// Pick all args
+const args: Args<typeof foo> = [ 123, 'hello' ];
 
 // Pick by index
 const firstArg: ArgI<typeof foo, 0> = 'hello world!';
@@ -75,6 +79,24 @@ function foo(a: number, b: string) {}
 const secondArg: Arg2<typeof foo> = 'hello world!';
 ```
 </details>
+
+## Class constructor
+
+Use `CtorArgs` to pick all args from constructor.
+
+```ts
+import { CtorArgs } from 'tsargs';
+
+class A {
+    constructor(
+        public x: number,
+        public y: string,
+        public z: boolean,
+    ) {}
+}
+
+const args: CtorArgs<typeof A> = [ 123, 'hello', false ];
+```
 
 ## Get arguments number
 
@@ -152,16 +174,16 @@ function foo(a: boolean, b: number, c: string) {}
 const argsBC: Args2off1<typeof foo> = [ 123, 'Hello' ];
 ```
 
-Use `ArgsN` to pick all arguments
+Use `Args` to pick all arguments
 
 ```ts
-import { ArgsN } from 'tsargs';
+import { Args } from 'tsargs';
 
 function foo(a: boolean, b: number, c: string) {}
-const argsABC: ArgsN<typeof foo> = [ true, 123, 'Hello' ];
+const argsABC: Args<typeof foo> = [ true, 123, 'Hello' ];
 ```
 
-`ArgsN` could be used in rest arguments:
+`Args` could be used in rest arguments:
 
 ```ts
 const myCallbacks = {
@@ -175,7 +197,7 @@ function call<
     Callback extends (...args: any[]) => any = Callbacks[CallbackName],
 >(
     callbackName: CallbackName,
-    ...args: ArgsN<Callback> // <<<<---------------
+    ...args: Args<Callback> // <<<<---------------
 ): ReturnType<Callback> {
     return (myCallbacks as { [k: string]: Function })[callbackName as any](...args);
 }
