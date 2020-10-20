@@ -4,7 +4,8 @@
 
 # tsargs
 
-TypeScript utility types for function arguments
+TypeScript utility types for function arguments  
+Use [Parameters\<T\>](https://www.typescriptlang.org/docs/handbook/utility-types.html#parameterstype) instead, if you dont need something special
 
 * [Pick type of argument](#pick-argument)
 * [Pick args of class constructor](#class-constructor)
