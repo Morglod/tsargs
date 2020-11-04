@@ -1,6 +1,4 @@
-[![NPM Version](https://badge.fury.io/js/tsargs.svg?style=flat)](https://www.npmjs.com/package/tsargs)
-
-[![NPM Downloads](https://img.shields.io/npm/dw/tsargs)](https://www.npmjs.com/package/tsargs)
+[![NPM Version](https://badge.fury.io/js/tsargs.svg?style=flat)](https://www.npmjs.com/package/tsargs) [![NPM Downloads](https://img.shields.io/npm/dw/tsargs)](https://www.npmjs.com/package/tsargs)
 
 # tsargs
 
